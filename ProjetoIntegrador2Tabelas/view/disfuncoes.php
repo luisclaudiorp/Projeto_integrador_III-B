@@ -9,7 +9,7 @@ require("header.php");
         <button class="btn btn-success">Criar Disfunção</button>
     </a>
     <h2 class="mt-3">Disfunções</h2>
-    <table class="table bg-light mt-3">
+    <table class="table table-responsive bg-light mt-3">
         <thead>
             <tr>
                 <th>ID</th>
