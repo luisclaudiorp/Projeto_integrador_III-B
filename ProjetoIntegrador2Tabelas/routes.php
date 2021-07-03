@@ -2,25 +2,50 @@
 
 //Rota para o index.
 Route::set('index.php', function() {
-	header('Location: disfuncoes');
+	LoginController::LoginView();
 });
 
 Route::set('index', function() {
-	header('Location: disfuncoes');
+	LoginController::LoginView();
 });
 
-Route::set('disfuncoes', function() {
-	AppController::DisfuncoesView();
+Route::set('deslogar', function() {
+	LoginController::Deslogar();
 });
+
+Route::set('login', function() {
+	LoginController::LoginView();
+});
+
+Route::set('logar_usuario_post', function() {
+	LoginController::logarUsuario();
+});
+
+Route::set('registrar', function() {
+	LoginController::RegisterView();
+});
+
+Route::set('registrar_usuario_post', function() {
+	LoginController::registrarUsuario();
+});
+
+
+
+///////////////////////////////////////////////
+///////////////////////////////////////////////
+///////////////////////////////////////////////
 
 Route::set('erro', function() {
 	AppController::errorView();
 });
 
+///////////////////////////////////////////////
+///////////////////////////////////////////////
+///////////////////////////////////////////////
 
-///////////////////////////////////////////////
-///////////////////////////////////////////////
-///////////////////////////////////////////////
+Route::set('disfuncoes', function() {
+	AppController::DisfuncoesView();
+});
 
 Route::set('disfuncao', function() {
 	AppController::DisfuncaoView();
@@ -56,7 +81,6 @@ Route::set('apagar-disfuncao', function() {
 ///////////////////////////////////////////////
 ///////////////////////////////////////////////
 
-//Rota para todos os tratamentos.
 Route::set('tratamentos', function() {
 	AppController::TratamentosView();
 });

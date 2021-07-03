@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16-Jun-2021 às 04:18
+-- Tempo de geração: 03-Jul-2021 às 23:30
 -- Versão do servidor: 10.4.19-MariaDB
 -- versão do PHP: 7.3.28
 
@@ -98,6 +98,26 @@ INSERT INTO `tratamento` (`id_tratamento`, `equipamento`, `parametros`, `interva
 (45, 'MICROGALVÂNICA', '70-100mA', '7 dias'),
 (46, 'CORRENTE RUSSA', '30hZ, rise 2s, on 6s, decay 2s, off20s. sincronizado, 40 MIN', '2/SEMANA');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id_usuario` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `senha` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `senha`) VALUES
+(16, 'Teste', 'teste@teste', '$2y$10$oijAABYRJgoL5nBokgeiaOBc.G14T3vlhBFltLnNARRyahY.6liz6');
+
 --
 -- Índices para tabelas despejadas
 --
@@ -123,6 +143,12 @@ ALTER TABLE `tratamento`
   ADD PRIMARY KEY (`id_tratamento`);
 
 --
+-- Índices para tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`);
+
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -130,19 +156,25 @@ ALTER TABLE `tratamento`
 -- AUTO_INCREMENT de tabela `disfuncao`
 --
 ALTER TABLE `disfuncao`
-  MODIFY `id_disfuncao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id_disfuncao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT de tabela `disfuncao_tratamento`
 --
 ALTER TABLE `disfuncao_tratamento`
-  MODIFY `id_disfuncao_tratamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id_disfuncao_tratamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT de tabela `tratamento`
 --
 ALTER TABLE `tratamento`
-  MODIFY `id_tratamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_tratamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restrições para despejos de tabelas

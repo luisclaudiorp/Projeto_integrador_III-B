@@ -14,5 +14,21 @@
   <div class="jumbotron bg-primary">
     <h1>PROJETO INTEGRADOR</h1>
     <p></p>
+    <?php
+		if(isset($_SESSION['email']) == true) {
+    ?>
+      <a href="deslogar"><button type="button" class="btn btn-danger">Deslogar</button></a>
+    <?php
+    }
+    ?>
+    <?php
+		if(isset($_SESSION['nome']) == true) {
+    ?>
+      <br>
+      <br>
+      <p style="font-size: 1.25em; color: white;">Usuário: <b><?php echo $_SESSION['nome']; ?></b></p>
+    <?php
+    }
+    ?>
   </div>
 
