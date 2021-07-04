@@ -2,6 +2,7 @@
 
 class Usuario extends Model {
 
+    //Método que retorna o nome do usuário que usa determinado email;
     public static function getNomeUsuarioFromEmail($email) {
         $sql = new Sql();
 
@@ -20,6 +21,7 @@ class Usuario extends Model {
         }
     }
 
+    //Método que verifica se o e-mail já foi registrado;
     public static function isEmailRegistered($email) {
         $sql = new Sql();
 

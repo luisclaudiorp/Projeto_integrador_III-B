@@ -18,8 +18,38 @@ class AppController extends Controller {
 
     public static function DisfuncoesView() {
 		self::isUsuarioLogged(function() {
-			$disfuncoes = Disfuncao::listAll();
-			Controller::CreateView("disfuncoes", ['disfuncoes' => $disfuncoes]);
+			
+			$limit = 5;
+			if (isset($_GET["busca"])) {
+				$busca = filter_var($_GET["busca"], FILTER_SANITIZE_STRING);
+				if ($busca !=null && $busca != "") {
+					$disfuncoes = Disfuncao::searchByNome($busca);
+					Controller::CreateView("disfuncoes", ['disfuncoes' => $disfuncoes]);
+				} else {
+					$_GET["page"] = '1';
+					$page = 1;
+					$offset = ($page - 1) * $limit;
+					$disfuncoes = Disfuncao::listPaginate($offset, $limit);
+					$totalPages = Disfuncao::getNumberOfPages($limit);
+					Controller::CreateView("disfuncoes", ['disfuncoes' => $disfuncoes, 'page' => $page, 'totalPages' => $totalPages]);
+				}
+			} else {			
+				if (isset($_GET["page"])) {
+					$page = filter_var($_GET["page"], FILTER_SANITIZE_STRING);
+					$page = intval($page);
+					$offset = ($page - 1) * $limit;
+					$disfuncoes = Disfuncao::listPaginate($offset, $limit);
+					$totalPages = Disfuncao::getNumberOfPages($limit);
+					Controller::CreateView("disfuncoes", ['disfuncoes' => $disfuncoes, 'page' => $page, 'totalPages' => $totalPages]);
+				} else {
+					$_GET["page"] = '1';
+					$page = 1;
+					$offset = ($page - 1) * $limit;
+					$disfuncoes = Disfuncao::listPaginate($offset, $limit);
+					$totalPages = Disfuncao::getNumberOfPages($limit);
+					Controller::CreateView("disfuncoes", ['disfuncoes' => $disfuncoes, 'page' => $page, 'totalPages' => $totalPages]);
+				}
+			}
 		});
     }
 
@@ -167,8 +197,37 @@ class AppController extends Controller {
 
 	public static function TratamentosView() {
 		self::isUsuarioLogged(function() {
-			$tratamentos = Tratamento::listAll();
-			Controller::CreateView("tratamentos", ['tratamentos' => $tratamentos]);
+			$limit = 5;
+			if (isset($_GET["busca"])) {
+				$busca = filter_var($_GET["busca"], FILTER_SANITIZE_STRING);
+				if ($busca !=null && $busca != "") {
+					$tratamentos = Tratamento::searchByEquipamento($busca);
+					Controller::CreateView("tratamentos", ['tratamentos' => $tratamentos]);
+				} else {
+					$_GET["page"] = '1';
+					$page = 1;
+					$offset = ($page - 1) * $limit;
+					$tratamentos = Tratamento::listPaginate($offset, $limit);
+					$totalPages = Tratamento::getNumberOfPages($limit);
+					Controller::CreateView("tratamentos", ['tratamentos' => $tratamentos, 'page' => $page, 'totalPages' => $totalPages]);
+				}
+			} else {			
+				if (isset($_GET["page"])) {
+					$page = filter_var($_GET["page"], FILTER_SANITIZE_STRING);
+					$page = intval($page);
+					$offset = ($page - 1) * $limit;
+					$tratamentos = Tratamento::listPaginate($offset, $limit);
+					$totalPages = Tratamento::getNumberOfPages($limit);
+					Controller::CreateView("tratamentos", ['tratamentos' => $tratamentos, 'page' => $page, 'totalPages' => $totalPages]);
+				} else {
+					$_GET["page"] = '1';
+					$page = 1;
+					$offset = ($page - 1) * $limit;
+					$tratamentos = Tratamento::listPaginate($offset, $limit);
+					$totalPages = Tratamento::getNumberOfPages($limit);
+					Controller::CreateView("tratamentos", ['tratamentos' => $tratamentos, 'page' => $page, 'totalPages' => $totalPages]);
+				}
+			}
 		});
     }
 

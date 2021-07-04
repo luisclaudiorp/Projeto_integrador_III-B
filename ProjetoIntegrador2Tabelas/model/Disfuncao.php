@@ -2,6 +2,7 @@
 
 class Disfuncao extends Model {
 
+    //Método que associa o tratamento a disfunção.
     public function addTratamento($id_tratamento) 
     {
         
@@ -25,6 +26,7 @@ class Disfuncao extends Model {
         
     }
 
+    //Método que disassocia o tratamento da disfunção.
     public function deleteTratamento($id_tratamento) {
         
         $sql = new Sql();
@@ -41,6 +43,31 @@ class Disfuncao extends Model {
         );
     }
 
+    //Método que retorna o numero total de paginas a serem exibidas com base no limite por página.
+    public static function getNumberOfPages($limit) {
+        $sql = new Sql();
+
+        $results = $sql->select("SELECT COUNT(*) FROM disfuncao ;");
+
+        $total_rows = $results[0]['COUNT(*)'];
+
+        $total_pages = ceil($total_rows / $limit);
+
+        return $total_pages;
+    }
+
+    //Método que retorna um array com as disfunções paginadas
+    public static function listPaginate($offset, $lim) {
+
+        $offset = intval($offset);
+
+        $sql = new Sql();
+
+        $data = $sql->select("SELECT * FROM disfuncao LIMIT $offset , $lim ;");
+
+        return $data;
+    }
+
 	//Método que retorna um array com todos as disfunções do banco de dados.
     public static function listAll()
     {
@@ -49,6 +76,19 @@ class Disfuncao extends Model {
         $data = $sql->select("SELECT * FROM disfuncao");
 
         return $data;
+    }
+
+    //Método que retorna um array com disfunções com nomes próximos ao pesquisado.
+    public static function searchByNome($nome)
+    {
+        $sql = new Sql();
+
+        $data = $sql->select("SELECT * FROM disfuncao WHERE nome LIKE CONCAT('%', :nome, '%') ;", array(
+            ':nome' => $nome,
+        ));
+
+        return $data;
+        
     }
 
 	//Método que recupera uma disfunção do banco de dados.

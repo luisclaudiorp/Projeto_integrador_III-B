@@ -2,6 +2,7 @@
 
 class Tratamento extends Model {
 
+    //Método que mostra todos os tratamentos de determinada disfunção;
     public static function listAllFromDisfuncao($id_disfuncao) {
         $sql = new Sql();
 
@@ -20,6 +21,31 @@ class Tratamento extends Model {
         return $data;
     }
 
+    //Método que retorna o numero total de paginas a serem exibidas com base no limite por página.
+    public static function getNumberOfPages($limit) {
+        $sql = new Sql();
+
+        $results = $sql->select("SELECT COUNT(*) FROM tratamento ;");
+
+        $total_rows = $results[0]['COUNT(*)'];
+
+        $total_pages = ceil($total_rows / $limit);
+
+        return $total_pages;
+    }
+
+    //Método que retorna um array com os tratamentos paginados
+    public static function listPaginate($offset, $lim) {
+
+        $offset = intval($offset);
+
+        $sql = new Sql();
+
+        $data = $sql->select("SELECT * FROM tratamento LIMIT $offset , $lim ;");
+
+        return $data;
+    }
+
 	//Método que retorna um array com todos os tratamentos do banco de dados.
     public static function listAll()
     {
@@ -28,6 +54,19 @@ class Tratamento extends Model {
         $data = $sql->select("SELECT * FROM tratamento");
 
         return $data;
+    }
+
+    //Método que retorna um array com tratamentos com equipamentos próximos ao pesquisado.
+    public static function searchByEquipamento($equipamento)
+    {
+        $sql = new Sql();
+
+        $data = $sql->select("SELECT * FROM tratamento WHERE equipamento LIKE CONCAT('%', :equipamento, '%') ;", array(
+            ':equipamento' => $equipamento,
+        ));
+
+        return $data;
+        
     }
 
 	//Método que recupera um tratamento do banco de dados.
